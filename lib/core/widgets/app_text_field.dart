@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
   final bool isPassword;
   final ValueChanged<String>? onChanged;
   final String? errorText;
+  final bool showCheckMark;
 
   const AppTextField({
     super.key,
@@ -24,6 +25,7 @@ class AppTextField extends StatelessWidget {
     this.isPassword = false,
     this.onChanged,
     this.errorText,
+    this.showCheckMark = false,
   });
 
   @override
@@ -53,7 +55,12 @@ class AppTextField extends StatelessWidget {
                   color: AppColors.textSecondary.withOpacity(0.5),
                 ),
             prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: AppColors.textSecondary) : null,
-            suffixIcon: suffixIcon != null ? Icon(suffixIcon, color: suffixIconColor ?? AppColors.textSecondary) : null,
+            suffixIcon: showCheckMark
+                ? Container(
+                    padding: EdgeInsets.all(12.r),
+                    child: Text('✅', style: TextStyle(fontSize: 16.sp)),
+                  )
+                : (suffixIcon != null ? Icon(suffixIcon, color: suffixIconColor ?? AppColors.textSecondary) : null),
             filled: true,
             fillColor: Colors.white,
             contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),

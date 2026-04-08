@@ -5,7 +5,9 @@ import 'package:superstore_driver/core/widgets/app_text_field.dart';
 
 class PhoneField extends StatelessWidget {
   final ValueChanged<String> onChanged;
-  const PhoneField({super.key, required this.onChanged});
+  final bool showCheckMark;
+
+  const PhoneField({super.key, required this.onChanged, this.showCheckMark = false});
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,26 @@ class PhoneField extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 8.w),
-                  Text('+234', style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: Colors.black)),
+                  Text(
+                    '+234',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
                 ],
               ),
             ),
             SizedBox(width: 12.w),
-            Expanded(child: AppTextField(hintText: '9075422444', onChanged: onChanged, suffixIcon: Icons.check_circle, suffixIconColor: Colors.green)),
+            Expanded(
+              child: AppTextField(
+                hintText: '9075422444',
+                onChanged: onChanged,
+                showCheckMark: showCheckMark,
+                keyboardType: TextInputType.phone,
+              ),
+            ),
           ],
         ),
       ],
@@ -51,17 +67,26 @@ class FooterText extends StatelessWidget {
   const FooterText({super.key});
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        style: TextStyle(color: AppColors.textSecondary, fontSize: 13.sp, fontWeight: FontWeight.w500, height: 1.5, fontFamily: 'Inter'),
-        children: [
-          const TextSpan(text: 'By signing up, you agree to our '),
-          TextSpan(text: 'Terms & Conditions', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
-          const TextSpan(text: ', acknowledging our '),
-          TextSpan(text: 'Privacy Policy', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
-          const TextSpan(text: ', and confirm that you are above 18.'),
-        ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          style: TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w500,
+            height: 1.5,
+            fontFamily: 'Inter',
+          ),
+          children: [
+            const TextSpan(text: 'By signing up, you agree to our '),
+            TextSpan(text: 'Terms & Conditions', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+            const TextSpan(text: ', acknowledging our '),
+            TextSpan(text: 'Privacy Policy', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+            const TextSpan(text: ', and confirm that you are above 18.'),
+          ],
+        ),
       ),
     );
   }

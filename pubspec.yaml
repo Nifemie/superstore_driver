@@ -41,6 +41,8 @@ dependencies:
   riverpod_annotation: ^2.3.5
   nigeria_lg_state_city: ^0.0.3
   nigeria_states_dropdown: ^0.0.1
+  image_picker: ^1.2.1
+  permission_handler: ^12.0.1
 
 dev_dependencies:
   flutter_test:

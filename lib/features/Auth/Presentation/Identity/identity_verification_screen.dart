@@ -1,19 +1,37 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../Logic/register_logic.dart';
 
-class IdentityVerificationScreen extends StatelessWidget {
+class IdentityVerificationScreen extends ConsumerWidget {
   const IdentityVerificationScreen({super.key});
 
+  Future<void> _pickImage(WidgetRef ref) async {
+    final picker = ImagePicker();
+    final XFile? image = await picker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 70,
+    );
+
+    if (image != null) {
+      ref.read(registerLogicProvider.notifier).updateIdentityDocument(image.path);
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(registerLogicProvider);
+
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
-        bottom: false,
+        bottom: true,
         child: Column(
           children: [
-            _buildHeader(context),
+            SizedBox(height: 20.h),
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -27,7 +45,29 @@ class IdentityVerificationScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+                      padding: EdgeInsets.only(left: 8.w, top: 16.h, right: 24.w),
+                      child: Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.arrow_back, color: Colors.black, size: 28),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                          Center(
+                            child: Text(
+                              'Riders registration',
+                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22.sp,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                       child: const _RegistrationTabs(),
                     ),
                     Expanded(
@@ -38,12 +78,14 @@ class IdentityVerificationScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Take a photo of your identity document',
-                              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22.sp,
-                                    height: 1.3,
-                                  ),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 26.sp,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Inter',
+                                height: 1.0,
+                                letterSpacing: 0,
+                              ),
                             ),
                             SizedBox(height: 8.h),
                             Text(
@@ -54,7 +96,7 @@ class IdentityVerificationScreen extends StatelessWidget {
                                   ),
                             ),
                             SizedBox(height: 32.h),
-                            _buildIDPreview(),
+                            _buildIDPreview(state.identityDocumentPath),
                             SizedBox(height: 24.h),
                             Center(
                               child: Text(
@@ -68,7 +110,11 @@ class IdentityVerificationScreen extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 40.h),
-                            const Center(child: _CaptureButton()),
+                            Center(
+                              child: _CaptureButton(
+                                onTap: () => _pickImage(ref),
+                              ),
+                            ),
                             SizedBox(height: 40.h),
                           ],
                         ),
@@ -84,43 +130,22 @@ class IdentityVerificationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          Text(
-            'Riders registration',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildIDPreview() {
+  Widget _buildIDPreview(String path) {
     return Container(
       width: double.infinity,
       height: 240.h,
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(16.r),
-        image: const DecorationImage(
-          image: AssetImage('assets/images/id_placeholder.png'),
-          fit: BoxFit.cover,
-        ),
+        image: path.isEmpty
+            ? const DecorationImage(
+                image: AssetImage('assets/images/id_placeholder.png'),
+                fit: BoxFit.cover,
+              )
+            : DecorationImage(
+                image: FileImage(File(path)),
+                fit: BoxFit.cover,
+              ),
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -134,12 +159,11 @@ class IdentityVerificationScreen extends StatelessWidget {
 
 class _RegistrationTabs extends StatelessWidget {
   const _RegistrationTabs();
-
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _buildTab('Rider verification', true),
+        _buildTab('Riders verification', true),
         SizedBox(width: 8.w),
         _buildTab('Business registration', false),
         SizedBox(width: 8.w),
@@ -155,16 +179,19 @@ class _RegistrationTabs extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            maxLines: 1,
+            maxLines: 2,
             style: TextStyle(
-              fontSize: 11.sp,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Inter',
+              height: 1.0,
+              letterSpacing: 0,
               color: isActive ? AppColors.primary : AppColors.textSecondary.withOpacity(0.6),
             ),
           ),
           SizedBox(height: 8.h),
           Container(
-            height: 2.h,
+            height: 3.h,
             width: double.infinity,
             decoration: BoxDecoration(
               color: isActive ? AppColors.primary : AppColors.divider.withOpacity(0.5),
@@ -178,14 +205,15 @@ class _RegistrationTabs extends StatelessWidget {
 }
 
 class _CaptureButton extends StatelessWidget {
-  const _CaptureButton();
+  final VoidCallback onTap;
+  const _CaptureButton({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: onTap,
           child: Container(
             padding: EdgeInsets.all(6.r),
             decoration: BoxDecoration(
@@ -205,11 +233,7 @@ class _CaptureButton extends StatelessWidget {
         SizedBox(height: 12.h),
         Text(
           'Capture',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textSecondary,
-          ),
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: AppColors.textSecondary),
         ),
       ],
     );

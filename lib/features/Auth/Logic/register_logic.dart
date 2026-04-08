@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:nigeria_lg_state_city/nigeria_lg_state_city.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,6 +13,7 @@ class RegisterState {
   final String phone;
   final String residentState;
   final String city;
+  final String identityDocumentPath;
   final bool isLoading;
 
   const RegisterState({
@@ -23,6 +25,7 @@ class RegisterState {
     this.phone = '',
     this.residentState = '',
     this.city = '',
+    this.identityDocumentPath = '',
     this.isLoading = false,
   });
 
@@ -46,6 +49,7 @@ class RegisterState {
       phone: phone ?? this.phone,
       residentState: residentState ?? this.residentState,
       city: city ?? this.city,
+      identityDocumentPath: identityDocumentPath ?? this.identityDocumentPath,
       isLoading: isLoading ?? this.isLoading,
     );
   }
@@ -78,11 +82,16 @@ class RegisterLogic extends _$RegisterLogic {
     );
   }
 
-  void submit() {
+  void updateIdentityDocument(String path) {
+    state = state.copyWith(identityDocumentPath: path);
+  }
+
+  void submit(BuildContext context) {
     state = state.copyWith(isLoading: true);
     // API Call Logic
     Future.delayed(const Duration(seconds: 2), () {
       state = state.copyWith(isLoading: false);
+      Navigator.pushNamed(context, '/identity_verification');
     });
   }
 }
