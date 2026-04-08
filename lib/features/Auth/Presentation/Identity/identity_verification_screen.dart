@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../core/theme/app_colors.dart';
+import 'package:superstore_driver/core/theme/app_colors.dart';
+import '../../../../routes/app_routes.dart';
 import '../../Logic/register_logic.dart';
+import 'package:superstore_driver/features/Auth/Presentation/Register/widgets/registration_tabs.dart';
 
 class IdentityVerificationScreen extends ConsumerWidget {
   const IdentityVerificationScreen({super.key});
@@ -61,7 +63,7 @@ class IdentityVerificationScreen extends ConsumerWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-                      child: const _RegistrationTabs(),
+                      child: const RegistrationTabs(activeIndex: 0),
                     ),
                     Expanded(
                       child: SingleChildScrollView(
@@ -132,7 +134,7 @@ class IdentityVerificationScreen extends ConsumerWidget {
                                   Expanded(
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        // Next step or confirmation
+                                        Navigator.pushNamed(context, AppRoutes.businessVerification);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColors.primary,
@@ -191,53 +193,6 @@ class IdentityVerificationScreen extends ConsumerWidget {
           borderRadius: BorderRadius.circular(16.r),
           color: Colors.black.withOpacity(0.05),
         ),
-      ),
-    );
-  }
-}
-
-class _RegistrationTabs extends StatelessWidget {
-  const _RegistrationTabs();
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _buildTab('Rider verification', true),
-        SizedBox(width: 8.w),
-        _buildTab('Business registration', false),
-        SizedBox(width: 8.w),
-        _buildTab('Bank details', false),
-      ],
-    );
-  }
-
-  Widget _buildTab(String label, bool isActive) {
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Inter',
-              height: 1.0,
-              letterSpacing: 0,
-              color: isActive ? AppColors.primary : AppColors.textSecondary.withOpacity(0.6),
-            ),
-          ),
-          SizedBox(height: 8.h),
-          Container(
-            height: 3.h,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: isActive ? AppColors.primary : AppColors.divider.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(2.r),
-            ),
-          ),
-        ],
       ),
     );
   }

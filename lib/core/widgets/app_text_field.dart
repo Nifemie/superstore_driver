@@ -10,6 +10,8 @@ class AppTextField extends StatelessWidget {
   final Color? suffixIconColor;
   final TextInputType? keyboardType;
   final bool isPassword;
+  final String? initialValue;
+  final int? maxLines;
   final ValueChanged<String>? onChanged;
   final String? errorText;
   final bool showCheckMark;
@@ -18,6 +20,8 @@ class AppTextField extends StatelessWidget {
     super.key,
     this.label = '',
     required this.hintText,
+    this.initialValue,
+    this.maxLines = 1,
     this.prefixIcon,
     this.suffixIcon,
     this.suffixIconColor,
@@ -44,6 +48,8 @@ class AppTextField extends StatelessWidget {
           SizedBox(height: 8.h),
         ],
         TextFormField(
+          initialValue: initialValue,
+          maxLines: maxLines,
           keyboardType: keyboardType,
           obscureText: isPassword,
           onChanged: onChanged,

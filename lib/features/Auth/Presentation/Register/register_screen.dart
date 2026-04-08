@@ -49,8 +49,8 @@ class RegisterScreen extends StatelessWidget {
                               'Create an account',
                               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.bold, // Original weight restored
-                                    fontSize: 24.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22.sp,
                                   ),
                             ),
                             SizedBox(height: 4.h),

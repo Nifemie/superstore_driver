@@ -14,6 +14,11 @@ class RegisterState {
   final String residentState;
   final String city;
   final String identityDocumentPath;
+  final String businessName;
+  final String businessAddress;
+  final String businessState;
+  final String businessCity;
+  final String businessDocumentPath;
   final bool isLoading;
 
   const RegisterState({
@@ -26,6 +31,11 @@ class RegisterState {
     this.residentState = '',
     this.city = '',
     this.identityDocumentPath = '',
+    this.businessName = '',
+    this.businessAddress = '',
+    this.businessState = '',
+    this.businessCity = '',
+    this.businessDocumentPath = '',
     this.isLoading = false,
   });
 
@@ -39,6 +49,11 @@ class RegisterState {
     String? residentState,
     String? city,
     String? identityDocumentPath,
+    String? businessName,
+    String? businessAddress,
+    String? businessState,
+    String? businessCity,
+    String? businessDocumentPath,
     bool? isLoading,
   }) {
     return RegisterState(
@@ -51,6 +66,11 @@ class RegisterState {
       residentState: residentState ?? this.residentState,
       city: city ?? this.city,
       identityDocumentPath: identityDocumentPath ?? this.identityDocumentPath,
+      businessName: businessName ?? this.businessName,
+      businessAddress: businessAddress ?? this.businessAddress,
+      businessState: businessState ?? this.businessState,
+      businessCity: businessCity ?? this.businessCity,
+      businessDocumentPath: businessDocumentPath ?? this.businessDocumentPath,
       isLoading: isLoading ?? this.isLoading,
     );
   }
@@ -83,8 +103,26 @@ class RegisterLogic extends _$RegisterLogic {
     );
   }
 
+  void updateBusinessFields({
+    String? businessName,
+    String? businessAddress,
+    String? businessState,
+    String? businessCity,
+  }) {
+    state = state.copyWith(
+      businessName: businessName,
+      businessAddress: businessAddress,
+      businessState: businessState,
+      businessCity: businessCity,
+    );
+  }
+
   void updateIdentityDocument(String path) {
     state = state.copyWith(identityDocumentPath: path);
+  }
+
+  void updateBusinessDocument(String path) {
+    state = state.copyWith(businessDocumentPath: path);
   }
 
   void submit(BuildContext context) {

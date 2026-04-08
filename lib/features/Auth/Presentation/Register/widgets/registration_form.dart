@@ -48,7 +48,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
               child: AppTextField(
                 label: 'First Name',
                 hintText: 'e.g. John',
-                showCheckMark: false, // Strictly removed as requested
+                showCheckMark: false,
                 onChanged: (v) => logic.updateField(firstName: v),
               ),
             ),
@@ -57,7 +57,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
               child: AppTextField(
                 label: 'Last Name',
                 hintText: 'e.g. Doe',
-                showCheckMark: false, // Strictly removed as requested
+                showCheckMark: false,
                 onChanged: (v) => logic.updateField(lastName: v),
               ),
             ),
@@ -73,7 +73,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
                 label: 'Gender',
                 value: state.gender.isEmpty ? null : state.gender,
                 items: ['Male', 'Female', 'Other'],
-                showCheckMark: state.gender.isNotEmpty, // Retained as requested
+                showCheckMark: state.gender.isNotEmpty,
                 onChanged: (v) => logic.updateField(gender: v),
               ),
             ),
@@ -82,7 +82,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
               child: _PickerField(
                 label: 'Date of birth',
                 value: state.dob == null ? '' : state.dob.toString().split(' ')[0],
-                showCheckMark: state.dob != null, // Retained as requested
+                showCheckMark: state.dob != null,
                 onTap: () => _showDatePicker(context, logic),
               ),
             ),
@@ -98,7 +98,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
         ),
         SizedBox(height: 16.h),
         PhoneField(
-          showCheckMark: state.phone.length >= 10, // Retained as requested
+          showCheckMark: state.phone.length >= 10,
           onChanged: (v) => logic.updateField(phone: v),
         ),
         SizedBox(height: 16.h),
@@ -116,7 +116,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
         SizedBox(height: 32.h),
         PrimaryButton(
           text: 'Next',
-          isLoading: state.isLoading, // Restored omission
+          isLoading: state.isLoading,
           onPressed: _isFormValid(state) ? () => logic.submit(context) : null,
         ),
         SizedBox(height: 24.h),

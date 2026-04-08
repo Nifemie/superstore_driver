@@ -48,6 +48,6 @@ class LoginLogic extends _$LoginLogic {
   }
 
   void onSocialLogin(String provider) {
-    // Leave social for now as requested
+    // Social login implementation
   }
 }
