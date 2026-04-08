@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'features/Auth/Presentation/Splashscreen/splashscreen.dart';
+import 'core/theme/app_theme.dart';
+import 'routes/app_routes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Superstore Driver',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-          home: const SplashScreen(),
+          theme: AppTheme.light,
+          initialRoute: AppRoutes.splash,
+          routes: AppRoutes.routes,
         );
       },
     );
