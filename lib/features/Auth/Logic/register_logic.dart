@@ -38,6 +38,7 @@ class RegisterState {
     String? phone,
     String? residentState,
     String? city,
+    String? identityDocumentPath,
     bool? isLoading,
   }) {
     return RegisterState(

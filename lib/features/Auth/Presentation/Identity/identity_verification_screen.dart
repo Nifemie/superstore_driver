@@ -10,15 +10,8 @@ class IdentityVerificationScreen extends ConsumerWidget {
   const IdentityVerificationScreen({super.key});
 
   Future<void> _pickImage(WidgetRef ref) async {
-    final picker = ImagePicker();
-    final XFile? image = await picker.pickImage(
-      source: ImageSource.camera,
-      imageQuality: 70,
-    );
-
-    if (image != null) {
-      ref.read(registerLogicProvider.notifier).updateIdentityDocument(image.path);
-    }
+    // Dummy logic for testing without actual camera access
+    ref.read(registerLogicProvider.notifier).updateIdentityDocument('dummy_captured');
   }
 
   @override
@@ -89,7 +82,9 @@ class IdentityVerificationScreen extends ConsumerWidget {
                             ),
                             SizedBox(height: 8.h),
                             Text(
-                              'National ID card, Drivers license and international passport are accepted for the verification',
+                              state.identityDocumentPath.isEmpty
+                                  ? 'National ID card, Drivers license and international passport are accepted for the verification'
+                                  : 'Submit this image if you feel its readable or click on retake to try again',
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: AppColors.textSecondary,
                                     height: 1.4,
@@ -98,23 +93,62 @@ class IdentityVerificationScreen extends ConsumerWidget {
                             SizedBox(height: 32.h),
                             _buildIDPreview(state.identityDocumentPath),
                             SizedBox(height: 24.h),
-                            Center(
-                              child: Text(
-                                'Position your ID within the frame, make sure your are in an environment where there is enough light',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.textSecondary,
-                                  fontSize: 13.sp,
-                                  height: 1.5,
+                            if (state.identityDocumentPath.isEmpty) ...[
+                              Center(
+                                child: Text(
+                                  'Position your ID within the frame, make sure your are in an environment where there is enough light',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: AppColors.textSecondary,
+                                    fontSize: 13.sp,
+                                    height: 1.5,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 40.h),
-                            Center(
-                              child: _CaptureButton(
-                                onTap: () => _pickImage(ref),
+                              SizedBox(height: 40.h),
+                              Center(
+                                child: _CaptureButton(
+                                  onTap: () => _pickImage(ref),
+                                ),
                               ),
-                            ),
+                            ] else ...[
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton(
+                                      onPressed: () => ref.read(registerLogicProvider.notifier).updateIdentityDocument(''),
+                                      style: OutlinedButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                                        side: BorderSide(color: Colors.grey.shade300),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                                      ),
+                                      child: Text(
+                                        'Retake',
+                                        style: TextStyle(color: Colors.black, fontSize: 16.sp, fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 16.w),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Next step or confirmation
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppColors.primary,
+                                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                                        elevation: 0,
+                                      ),
+                                      child: Text(
+                                        'Apply',
+                                        style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                             SizedBox(height: 40.h),
                           ],
                         ),
@@ -142,10 +176,15 @@ class IdentityVerificationScreen extends ConsumerWidget {
                 image: AssetImage('assets/images/id_placeholder.png'),
                 fit: BoxFit.cover,
               )
-            : DecorationImage(
-                image: FileImage(File(path)),
-                fit: BoxFit.cover,
-              ),
+            : path == 'dummy_captured'
+                ? const DecorationImage(
+                    image: AssetImage('assets/images/id_placeholder_2.png'),
+                    fit: BoxFit.cover,
+                  )
+                : DecorationImage(
+                    image: FileImage(File(path)),
+                    fit: BoxFit.cover,
+                  ),
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -163,7 +202,7 @@ class _RegistrationTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _buildTab('Riders verification', true),
+        _buildTab('Rider verification', true),
         SizedBox(width: 8.w),
         _buildTab('Business registration', false),
         SizedBox(width: 8.w),
