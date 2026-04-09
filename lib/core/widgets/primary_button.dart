@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:superstore_driver/core/theme/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
@@ -25,8 +26,10 @@ class PrimaryButton extends StatelessWidget {
       height: 56,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
+          backgroundColor: backgroundColor ?? AppColors.primary,
+          foregroundColor: foregroundColor ?? Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          elevation: 0,
         ),
         onPressed: isLoading ? null : onPressed,
         child: isLoading

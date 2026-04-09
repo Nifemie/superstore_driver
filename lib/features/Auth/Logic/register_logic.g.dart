@@ -6,7 +6,7 @@ part of 'register_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$registerLogicHash() => r'e58cc3e7af4c7edb311670977cca617dd949cb66';
+String _$registerLogicHash() => r'bbdff708620f099a15eec4cdf1b7c0a7a7d5f3fb';
 
 /// See also [RegisterLogic].
 @ProviderFor(RegisterLogic)

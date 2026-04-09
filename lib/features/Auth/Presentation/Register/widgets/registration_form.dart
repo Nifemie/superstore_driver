@@ -64,7 +64,6 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
           ],
         ),
         SizedBox(height: 16.h),
-        // Perfectly Aligned Gender and DOB Row
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

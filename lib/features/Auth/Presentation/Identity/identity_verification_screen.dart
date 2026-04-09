@@ -12,7 +12,6 @@ class IdentityVerificationScreen extends ConsumerWidget {
   const IdentityVerificationScreen({super.key});
 
   Future<void> _pickImage(WidgetRef ref) async {
-    // Dummy logic for testing without actual camera access
     ref.read(registerLogicProvider.notifier).updateIdentityDocument('dummy_captured');
   }
 

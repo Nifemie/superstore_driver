@@ -11,10 +11,9 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
-        bottom: true, // Safeguard bottom navigation visibility
+        bottom: true,
         child: Column(
           children: [
-            // Clean orange status bar area
             SizedBox(height: 20.h),
             Expanded(
               child: Container(
@@ -29,7 +28,6 @@ class RegisterScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // New Header Section: Back button at top left, Title/Subtitle below
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                       child: IconButton(

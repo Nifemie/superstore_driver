@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nigeria_lg_state_city/const.dart' as location;
-import 'package:nigeria_lg_state_city/nigeria_lg_state_city.dart' as pkg;
+
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/app_text_field.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
@@ -18,13 +17,7 @@ class BusinessVerificationScreen extends ConsumerStatefulWidget {
 }
 
 class _BusinessVerificationScreenState extends ConsumerState<BusinessVerificationScreen> {
-  final _locationController = location.StateLgaCityController();
 
-  @override
-  void dispose() {
-    _locationController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,27 +87,22 @@ class _BusinessVerificationScreenState extends ConsumerState<BusinessVerificatio
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: pkg.NigeriaStateDropdown(
-                                    controller: _locationController,
-                                    decoration: _dropdownDecoration('State'),
-                                    onChanged: (v) {
-                                      logic.updateBusinessFields(
-                                        businessState: _locationController.selectedState?['name'] ?? '',
-                                        businessCity: '', // Reset city on state change
-                                      );
-                                    },
+                                  child: AppTextField(
+                                    label: 'State',
+                                    hintText: 'Enter state',
+                                    initialValue: state.businessState,
+                                    showCheckMark: state.businessState.isNotEmpty,
+                                    onChanged: (v) => logic.updateBusinessFields(businessState: v),
                                   ),
                                 ),
                                 SizedBox(width: 16.w),
                                 Expanded(
-                                  child: pkg.NigeriaCityDropdown(
-                                    controller: _locationController,
-                                    decoration: _dropdownDecoration('City'),
-                                    onChanged: (v) {
-                                      logic.updateBusinessFields(
-                                        businessCity: _locationController.selectedCity?['name'] ?? '',
-                                      );
-                                    },
+                                  child: AppTextField(
+                                    label: 'City',
+                                    hintText: 'Enter city',
+                                    initialValue: state.businessCity,
+                                    showCheckMark: state.businessCity.isNotEmpty,
+                                    onChanged: (v) => logic.updateBusinessFields(businessCity: v),
                                   ),
                                 ),
                               ],
@@ -152,18 +140,7 @@ class _BusinessVerificationScreenState extends ConsumerState<BusinessVerificatio
     );
   }
 
-  InputDecoration _dropdownDecoration(String label) {
-    return InputDecoration(
-      labelText: label,
-      labelStyle: TextStyle(color: AppColors.textSecondary, fontSize: 13.sp, fontWeight: FontWeight.w500),
-      floatingLabelBehavior: FloatingLabelBehavior.always,
-      hintText: 'Choose ${label.toLowerCase()}',
-      hintStyle: TextStyle(color: AppColors.textSecondary.withOpacity(0.5), fontSize: 13.sp),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: const BorderSide(color: AppColors.divider)),
-      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: const BorderSide(color: AppColors.primary, width: 2)),
-    );
-  }
+
 
   bool _isFormValid(RegisterState state) {
     return state.businessName.isNotEmpty &&

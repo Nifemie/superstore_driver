@@ -35,6 +35,7 @@ class RegistrationTabs extends StatelessWidget {
               letterSpacing: 0,
               color: isActive ? AppColors.primary : AppColors.textSecondary.withOpacity(0.6),
             ),
+            overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 8.h),
           Container(

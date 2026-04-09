@@ -10,7 +10,6 @@ class BusinessDocumentUploadScreen extends ConsumerWidget {
   const BusinessDocumentUploadScreen({super.key});
 
   void _simulateUpload(WidgetRef ref) {
-    // Simulate picking a business document
     ref.read(registerLogicProvider.notifier).updateBusinessDocument('Business document.PDF');
   }
 
@@ -122,7 +121,7 @@ class BusinessDocumentUploadScreen extends ConsumerWidget {
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: Colors.grey.withOpacity(0.3),
-            style: BorderStyle.solid, // Note: Ideally dashed, but solid for now to match the "clean" feel
+            style: BorderStyle.solid,
           ),
         ),
         child: Column(

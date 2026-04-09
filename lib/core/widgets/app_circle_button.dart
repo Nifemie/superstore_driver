@@ -28,13 +28,13 @@ class AppCircleButton extends StatelessWidget {
         },
         customBorder: const CircleBorder(),
         child: Container(
-          height: 64.r, // Reduced from 80.r for better fit
-          width: 64.r, // Reduced from 80.r for better fit
+          height: 64.r,
+          width: 64.r,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: AppColors.divider.withOpacity(0.8), // Increased opacity for visibility
-              width: 1.5, // Increased width for better definition
+              color: AppColors.divider.withOpacity(0.8),
+              width: 1.5,
             ),
           ),
           alignment: Alignment.center,

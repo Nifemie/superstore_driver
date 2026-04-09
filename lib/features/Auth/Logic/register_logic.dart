@@ -127,7 +127,6 @@ class RegisterLogic extends _$RegisterLogic {
 
   void submit(BuildContext context) {
     state = state.copyWith(isLoading: true);
-    // API Call Logic
     Future.delayed(const Duration(seconds: 2), () {
       state = state.copyWith(isLoading: false);
       Navigator.pushNamed(context, '/identity_verification');
