@@ -25,20 +25,38 @@ class ActivitiesSection extends StatelessWidget {
         ),
         SizedBox(height: 16.h),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 20.h),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16.r),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildActivityStat('Earnings Today', state.todayEarnings.toCurrency()),
-              const VerticalDivider(color: AppColors.divider),
-              _buildActivityStat('Online', state.onlineTime),
-              const VerticalDivider(color: AppColors.divider),
-              _buildActivityStat('Rides Today', state.totalRidesToday.toString().padLeft(2, '0')),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
             ],
+          ),
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(child: _buildActivityStat('Earnings Today', state.todayEarnings.toCurrency())),
+                const VerticalDivider(
+                  color: Color(0xFFE0E0E0),
+                  thickness: 1,
+                  indent: 15,
+                  endIndent: 15,
+                ),
+                Expanded(child: _buildActivityStat('Online', state.onlineTime)),
+                const VerticalDivider(
+                  color: Color(0xFFE0E0E0),
+                  thickness: 1,
+                  indent: 15,
+                  endIndent: 15,
+                ),
+                Expanded(child: _buildActivityStat('Rides Today', state.totalRidesToday.toString().padLeft(2, '0'))),
+              ],
+            ),
           ),
         ),
       ],
@@ -46,18 +64,31 @@ class ActivitiesSection extends StatelessWidget {
   }
 
   Widget _buildActivityStat(String label, String value) {
-    return Column(
-      children: [
-        Text(
-          label,
-          style: TextStyle(color: AppColors.textSecondary, fontSize: 13.sp, fontFamily: 'Inter'),
-        ),
-        SizedBox(height: 8.h),
-        Text(
-          value,
-          style: TextStyle(color: AppColors.textPrimary, fontSize: 18.sp, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              color: const Color(0xFF9E9E9E),
+              fontSize: 13.sp,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 8.h),
+          Text(
+            value,
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w800,
+              fontFamily: 'Inter',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

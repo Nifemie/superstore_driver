@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nigeria_lg_state_city/nigeria_lg_state_city.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:superstore_driver/routes/app_routes.dart';
+import '../../../core/services/local_storage_service.dart';
 
 part 'register_logic.g.dart';
 
@@ -19,6 +20,9 @@ class RegisterState {
   final String businessState;
   final String businessCity;
   final String businessDocumentPath;
+  final String bankName;
+  final String accountNumber;
+  final String accountName;
   final bool isLoading;
 
   const RegisterState({
@@ -36,6 +40,9 @@ class RegisterState {
     this.businessState = '',
     this.businessCity = '',
     this.businessDocumentPath = '',
+    this.bankName = '',
+    this.accountNumber = '',
+    this.accountName = '',
     this.isLoading = false,
   });
 
@@ -54,6 +61,9 @@ class RegisterState {
     String? businessState,
     String? businessCity,
     String? businessDocumentPath,
+    String? bankName,
+    String? accountNumber,
+    String? accountName,
     bool? isLoading,
   }) {
     return RegisterState(
@@ -71,6 +81,9 @@ class RegisterState {
       businessState: businessState ?? this.businessState,
       businessCity: businessCity ?? this.businessCity,
       businessDocumentPath: businessDocumentPath ?? this.businessDocumentPath,
+      bankName: bankName ?? this.bankName,
+      accountNumber: accountNumber ?? this.accountNumber,
+      accountName: accountName ?? this.accountName,
       isLoading: isLoading ?? this.isLoading,
     );
   }
@@ -79,7 +92,21 @@ class RegisterState {
 @riverpod
 class RegisterLogic extends _$RegisterLogic {
   @override
-  RegisterState build() => const RegisterState();
+  RegisterState build() {
+    _init();
+    return const RegisterState();
+  }
+
+  Future<void> _init() async {
+    final saved = await LocalStorageService.loadRegisterState();
+    if (saved != null) {
+      state = saved;
+    }
+  }
+
+  void _save() {
+    LocalStorageService.saveRegisterState(state);
+  }
 
   void updateField({
     String? firstName,
@@ -101,6 +128,7 @@ class RegisterLogic extends _$RegisterLogic {
       residentState: residentState,
       city: city,
     );
+    _save();
   }
 
   void updateBusinessFields({
@@ -115,7 +143,22 @@ class RegisterLogic extends _$RegisterLogic {
       businessState: businessState,
       businessCity: businessCity,
     );
+    _save();
   }
+
+  void updateBankFields({
+    String? bankName,
+    String? accountNumber,
+    String? accountName,
+  }) {
+    state = state.copyWith(
+      bankName: bankName,
+      accountNumber: accountNumber,
+      accountName: accountName,
+    );
+    _save();
+  }
+
 
   void updateIdentityDocument(String path) {
     state = state.copyWith(identityDocumentPath: path);
@@ -129,7 +172,7 @@ class RegisterLogic extends _$RegisterLogic {
     state = state.copyWith(isLoading: true);
     Future.delayed(const Duration(seconds: 2), () {
       state = state.copyWith(isLoading: false);
-      Navigator.pushNamed(context, '/identity_verification');
+      Navigator.pushNamed(context, AppRoutes.underReview);
     });
   }
 }

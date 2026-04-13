@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nigeria_lg_state_city/const.dart' as location;
-import 'package:nigeria_lg_state_city/nigeria_lg_state_city.dart' as pkg;
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/app_text_field.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
 import 'package:superstore_driver/features/Auth/Logic/register_logic.dart';
 import 'package:superstore_driver/features/Auth/Presentation/Register/widgets/registration_widgets.dart';
+import 'package:superstore_driver/routes/app_routes.dart';
 
 class RegistrationForm extends ConsumerStatefulWidget {
   const RegistrationForm({super.key});
@@ -16,13 +15,9 @@ class RegistrationForm extends ConsumerStatefulWidget {
 }
 
 class _RegistrationFormState extends ConsumerState<RegistrationForm> {
-  final _locationController = location.StateLgaCityController();
 
-  @override
-  void dispose() {
-    _locationController.dispose();
-    super.dispose();
-  }
+
+
 
   bool _isFormValid(RegisterState state) {
     return state.firstName.isNotEmpty &&
@@ -48,6 +43,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
               child: AppTextField(
                 label: 'First Name',
                 hintText: 'e.g. John',
+                initialValue: state.firstName,
                 showCheckMark: false,
                 onChanged: (v) => logic.updateField(firstName: v),
               ),
@@ -57,6 +53,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
               child: AppTextField(
                 label: 'Last Name',
                 hintText: 'e.g. Doe',
+                initialValue: state.lastName,
                 showCheckMark: false,
                 onChanged: (v) => logic.updateField(lastName: v),
               ),
@@ -91,32 +88,38 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
         AppTextField(
           label: 'Email address',
           hintText: 'Enter email',
+          initialValue: state.email,
           prefixIcon: Icons.email_outlined,
-          showCheckMark: false, // Strictly removed as requested
+          showCheckMark: false,
           onChanged: (v) => logic.updateField(email: v),
         ),
         SizedBox(height: 16.h),
         PhoneField(
-          showCheckMark: state.phone.length >= 10,
+          initialValue: state.phone,
+          showCheckMark: false,
           onChanged: (v) => logic.updateField(phone: v),
         ),
         SizedBox(height: 16.h),
-        pkg.NigeriaStateDropdown(
-          controller: _locationController,
-          decoration: _dropdownDecoration('State'),
-          onChanged: (v) => logic.updateField(residentState: _locationController.selectedState?['name'] ?? ''),
+        AppTextField(
+          label: 'State',
+          hintText: 'e.g. Lagos',
+          initialValue: state.residentState,
+          showCheckMark: false,
+          onChanged: (v) => logic.updateField(residentState: v),
         ),
         SizedBox(height: 16.h),
-        pkg.NigeriaCityDropdown(
-          controller: _locationController,
-          decoration: _dropdownDecoration('City'),
-          onChanged: (v) => logic.updateField(city: _locationController.selectedCity?['name'] ?? ''),
+        AppTextField(
+          label: 'City',
+          hintText: 'e.g. Ikeja',
+          initialValue: state.city,
+          showCheckMark: false,
+          onChanged: (v) => logic.updateField(city: v),
         ),
         SizedBox(height: 32.h),
         PrimaryButton(
           text: 'Next',
           isLoading: state.isLoading,
-          onPressed: _isFormValid(state) ? () => logic.submit(context) : null,
+          onPressed: _isFormValid(state) ? () => Navigator.pushNamed(context, AppRoutes.identityVerification) : null,
         ),
         SizedBox(height: 24.h),
         const FooterText(),

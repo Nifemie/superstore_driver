@@ -5,9 +5,10 @@ import 'package:superstore_driver/core/widgets/app_text_field.dart';
 
 class PhoneField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final String? initialValue;
   final bool showCheckMark;
 
-  const PhoneField({super.key, required this.onChanged, this.showCheckMark = false});
+  const PhoneField({super.key, required this.onChanged, this.initialValue, this.showCheckMark = false});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,8 @@ class PhoneField extends StatelessWidget {
             SizedBox(width: 12.w),
             Expanded(
               child: AppTextField(
-                hintText: '9075422444',
+                hintText: '07012345678',
+                initialValue: initialValue,
                 onChanged: onChanged,
                 showCheckMark: showCheckMark,
                 keyboardType: TextInputType.phone,

@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../../../routes/app_routes.dart';
 
 part 'verification_logic.g.dart';
 
+// verification state
 class VerificationState {
   final String otp;
   final int timerSeconds;
@@ -39,6 +41,7 @@ class VerificationLogic extends _$VerificationLogic {
   Timer? _timer;
 
   @override
+  // build state
   VerificationState build() {
     _startTimer();
     return const VerificationState(
@@ -48,6 +51,7 @@ class VerificationLogic extends _$VerificationLogic {
     );
   }
 
+  // start timer
   void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -78,9 +82,11 @@ class VerificationLogic extends _$VerificationLogic {
     }
   }
 
+  // verify otp code
   void verifyCode(BuildContext context) {
     if (state.otp == '12345') {
       state = state.copyWith(clearError: true);
+      LocalStorageService.setLoggedIn(true);
       Navigator.pushNamed(context, AppRoutes.register);
     } else if (state.otp.length == 5) {
       state = state.copyWith(errorMessage: 'Incorrect OTP: Check the code and try again');

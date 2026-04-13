@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
+import 'package:superstore_driver/core/services/local_storage_service.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,9 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToLogin() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () async {
       if (mounted) {
-        Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+        final loggedIn = await LocalStorageService.isLoggedIn();
+        if (loggedIn) {
+          Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+        } else {
+          Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+        }
       }
     });
   }

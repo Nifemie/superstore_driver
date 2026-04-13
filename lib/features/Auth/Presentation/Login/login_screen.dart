@@ -50,13 +50,13 @@ class _LoginHeader extends StatelessWidget {
           Container(
             height: 90.r,
             width: 90.r,
-            padding: EdgeInsets.all(16.r),
-            decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-            child: Image.asset('assets/icons/logo.png', fit: BoxFit.contain),
+            clipBehavior: Clip.antiAlias,
+            decoration: const BoxDecoration(shape: BoxShape.circle),
+            child: Image.asset('assets/icons/logo.png', fit: BoxFit.cover),
           ),
           SizedBox(height: 16.h),
           Text(
-            'Welcome to superstore\nrider app',
+            'Welcome to Superstore\nRider App',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),

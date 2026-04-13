@@ -5,6 +5,7 @@ import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
 import '../../Logic/register_logic.dart';
 import '../Register/widgets/registration_tabs.dart';
+import 'package:superstore_driver/routes/app_routes.dart';
 
 class BusinessDocumentUploadScreen extends ConsumerWidget {
   const BusinessDocumentUploadScreen({super.key});
@@ -91,7 +92,7 @@ class BusinessDocumentUploadScreen extends ConsumerWidget {
                               text: 'Next',
                               onPressed: state.businessDocumentPath.isNotEmpty
                                   ? () {
-                                      // Next step: Bank Details
+                                      Navigator.pushNamed(context, AppRoutes.bankDetails);
                                     }
                                   : null,
                             ),

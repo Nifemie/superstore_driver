@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
+import 'package:superstore_driver/features/Auth/Logic/register_logic.dart';
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends ConsumerWidget {
   const HomeHeader({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final registerState = ref.watch(registerLogicProvider);
+    final displayName = registerState.firstName.isNotEmpty ? registerState.firstName : 'Driver';
+
     return Row(
       children: [
         CircleAvatar(
@@ -20,7 +25,7 @@ class HomeHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hello, John',
+                'Hello, $displayName',
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
