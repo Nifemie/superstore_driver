@@ -1,12 +1,10 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../core/services/local_storage_service.dart';
-import '../../../routes/app_routes.dart';
+import 'package:superstore_driver/core/services/local_storage_service.dart';
+import 'package:superstore_driver/routes/app_routes.dart';
 
-part 'verification_logic.g.dart';
-
-// verification state
 class VerificationState {
   final String otp;
   final int timerSeconds;
@@ -36,12 +34,10 @@ class VerificationState {
   }
 }
 
-@riverpod
-class VerificationLogic extends _$VerificationLogic {
+class VerificationController extends Notifier<VerificationState> {
   Timer? _timer;
 
   @override
-  // build state
   VerificationState build() {
     _startTimer();
     return const VerificationState(
@@ -51,7 +47,6 @@ class VerificationLogic extends _$VerificationLogic {
     );
   }
 
-  // start timer
   void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -82,14 +77,13 @@ class VerificationLogic extends _$VerificationLogic {
     }
   }
 
-  // verify otp code
   void verifyCode(BuildContext context) {
-    if (state.otp == '12345') {
+    if (state.otp.length == 5) {
       state = state.copyWith(clearError: true);
       LocalStorageService.setLoggedIn(true);
       context.push(AppRoutes.register);
-    } else if (state.otp.length == 5) {
-      state = state.copyWith(errorMessage: 'Incorrect OTP: Check the code and try again');
+    } else {
+      state = state.copyWith(errorMessage: 'Please enter a 5-digit OTP');
     }
   }
 
@@ -100,3 +94,5 @@ class VerificationLogic extends _$VerificationLogic {
     }
   }
 }
+
+final verificationControllerProvider = NotifierProvider<VerificationController, VerificationState>(VerificationController.new);

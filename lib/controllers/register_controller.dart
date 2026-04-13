@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:superstore_driver/core/services/local_storage_service.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
-import '../../../core/services/local_storage_service.dart';
-
-part 'register_logic.g.dart';
 
 class RegisterState {
   final String firstName;
@@ -89,8 +88,7 @@ class RegisterState {
   }
 }
 
-@riverpod
-class RegisterLogic extends _$RegisterLogic {
+class RegisterController extends Notifier<RegisterState> {
   @override
   RegisterState build() {
     _init();
@@ -159,20 +157,23 @@ class RegisterLogic extends _$RegisterLogic {
     _save();
   }
 
-
   void updateIdentityDocument(String path) {
     state = state.copyWith(identityDocumentPath: path);
+    _save();
   }
 
   void updateBusinessDocument(String path) {
     state = state.copyWith(businessDocumentPath: path);
+    _save();
   }
 
   void submit(BuildContext context) {
     state = state.copyWith(isLoading: true);
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       state = state.copyWith(isLoading: false);
       context.push(AppRoutes.underReview);
     });
   }
 }
+
+final registerControllerProvider = NotifierProvider<RegisterController, RegisterState>(RegisterController.new);

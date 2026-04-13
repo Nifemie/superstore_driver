@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/transaction_item.dart';
-import 'package:superstore_driver/features/Transactions/Logic/transaction_logic.dart';
-import 'package:superstore_driver/features/Transactions/Presentation/widgets/month_year_picker_dialog.dart';
+import 'package:superstore_driver/controllers/transaction_controller.dart';
+import 'package:superstore_driver/core/widgets/month_year_picker_dialog.dart';
 
 class TransactionsScreen extends ConsumerWidget {
   const TransactionsScreen({super.key});
@@ -20,7 +20,7 @@ class TransactionsScreen extends ConsumerWidget {
         return MonthYearPickerDialog(
           initialDate: initialDate ?? DateTime.now(),
           onDone: (month, year) {
-            ref.read(transactionLogicProvider.notifier).updateDate(month, year);
+            ref.read(transactionControllerProvider.notifier).updateDate(month, year);
           },
         );
       },
@@ -36,7 +36,7 @@ class TransactionsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(transactionLogicProvider);
+    final state = ref.watch(transactionControllerProvider);
     final filtered = state.filteredTransactions;
     
     // Group transactions by date for headers

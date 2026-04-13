@@ -5,8 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/app_text_field.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
-import 'package:superstore_driver/features/Auth/Logic/register_logic.dart';
-import 'package:superstore_driver/features/Auth/Presentation/Register/widgets/registration_widgets.dart';
+import 'package:superstore_driver/controllers/register_controller.dart';
+import 'package:superstore_driver/core/widgets/phone_field.dart';
+import 'package:superstore_driver/core/widgets/footer_text.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
 
 class RegistrationForm extends ConsumerStatefulWidget {
@@ -33,8 +34,8 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(registerLogicProvider);
-    final logic = ref.read(registerLogicProvider.notifier);
+    final state = ref.watch(registerControllerProvider);
+    final logic = ref.read(registerControllerProvider.notifier);
 
     return Column(
       children: [
@@ -138,7 +139,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
     );
   }
 
-  void _showDatePicker(BuildContext context, RegisterLogic logic) async {
+  void _showDatePicker(BuildContext context, RegisterController logic) async {
     final date = await showDatePicker(
       context: context,
       initialDate: DateTime(2000),

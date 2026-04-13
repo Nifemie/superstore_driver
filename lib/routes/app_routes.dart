@@ -7,7 +7,7 @@ import '../features/Auth/Presentation/Register/register_screen.dart';
 import '../features/Auth/Presentation/Identity/identity_verification_screen.dart';
 import '../features/Auth/Presentation/Business/business_verification_screen.dart';
 import '../features/Auth/Presentation/Business/business_document_upload_screen.dart';
-import '../features/Auth/Presentation/Bank/bank_details_screen.dart';
+import '../features/Bank/bank_details_screen.dart';
 import '../features/Auth/Presentation/Register/under_review_screen.dart';
 import '../features/Home/Presentation/home_screen.dart';
 import '../features/Transactions/Presentation/transactions_screen.dart';
@@ -25,7 +25,7 @@ class AppRoutes {
   static const String bankDetails = '/bank_details';
   static const String underReview = '/under_review';
   static const String home = '/home';
-  static const String transactions = 'transactions'; // Sub-route of home
+  static const String transactions = 'transactions'; 
   static const String map = '/map';
   static const String delivery = '/delivery';
   static const String more = '/more';
@@ -78,13 +78,13 @@ class AppRoutes {
         builder: (context, state) => const UnderReviewScreen(),
       ),
 
-      // Stateful Shell Route
+
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return ScaffoldWithNavBar(navigationShell: navigationShell);
         },
         branches: [
-          // Home Branch
+
           StatefulShellBranch(
             navigatorKey: _shellNavigatorHomeKey,
             routes: [
@@ -100,7 +100,7 @@ class AppRoutes {
               ),
             ],
           ),
-          // Map Branch
+
           StatefulShellBranch(
             navigatorKey: _shellNavigatorMapKey,
             routes: [
@@ -110,7 +110,7 @@ class AppRoutes {
               ),
             ],
           ),
-          // Delivery Branch
+
           StatefulShellBranch(
             navigatorKey: _shellNavigatorDeliveryKey,
             routes: [
@@ -120,7 +120,7 @@ class AppRoutes {
               ),
             ],
           ),
-          // More Branch
+
           StatefulShellBranch(
             navigatorKey: _shellNavigatorMoreKey,
             routes: [

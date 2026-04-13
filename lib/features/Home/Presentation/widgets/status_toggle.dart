@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
-import 'package:superstore_driver/features/Home/Logic/home_logic.dart';
+import 'package:superstore_driver/controllers/home_controller.dart';
 
 class StatusToggle extends ConsumerWidget {
   const StatusToggle({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeLogicProvider);
+    final state = ref.watch(homeControllerProvider);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,7 +51,7 @@ class StatusToggle extends ConsumerWidget {
         ),
         Switch(
           value: state.isOnline,
-          onChanged: (_) => ref.read(homeLogicProvider.notifier).toggleOnline(),
+          onChanged: (_) => ref.read(homeControllerProvider.notifier).toggleOnline(),
           activeColor: AppColors.primary,
         ),
       ],

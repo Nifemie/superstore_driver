@@ -1,6 +1,4 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'home_logic.g.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeState {
   final bool isOnline;
@@ -38,8 +36,7 @@ class HomeState {
   }
 }
 
-@riverpod
-class HomeLogic extends _$HomeLogic {
+class HomeController extends Notifier<HomeState> {
   @override
   HomeState build() => const HomeState();
 
@@ -51,3 +48,5 @@ class HomeLogic extends _$HomeLogic {
     state = state.copyWith(showEarnings: !state.showEarnings);
   }
 }
+
+final homeControllerProvider = NotifierProvider<HomeController, HomeState>(HomeController.new);

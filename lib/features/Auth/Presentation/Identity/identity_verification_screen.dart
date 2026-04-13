@@ -6,19 +6,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import '../../../../routes/app_routes.dart';
-import '../../Logic/register_logic.dart';
-import 'package:superstore_driver/features/Auth/Presentation/Register/widgets/registration_tabs.dart';
+import 'package:superstore_driver/controllers/register_controller.dart';
+import 'package:superstore_driver/core/widgets/registration_tabs.dart';
 
 class IdentityVerificationScreen extends ConsumerWidget {
   const IdentityVerificationScreen({super.key});
 
   Future<void> _pickImage(WidgetRef ref) async {
-    ref.read(registerLogicProvider.notifier).updateIdentityDocument('dummy_captured');
+    ref.read(registerControllerProvider.notifier).updateIdentityDocument('dummy_captured');
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(registerLogicProvider);
+    final state = ref.watch(registerControllerProvider);
 
     return Scaffold(
       backgroundColor: AppColors.primary,
@@ -118,7 +118,7 @@ class IdentityVerificationScreen extends ConsumerWidget {
                                 children: [
                                   Expanded(
                                     child: OutlinedButton(
-                                      onPressed: () => ref.read(registerLogicProvider.notifier).updateIdentityDocument(''),
+                                      onPressed: () => ref.read(registerControllerProvider.notifier).updateIdentityDocument(''),
                                       style: OutlinedButton.styleFrom(
                                         padding: EdgeInsets.symmetric(vertical: 16.h),
                                         side: BorderSide(color: Colors.grey.shade300),

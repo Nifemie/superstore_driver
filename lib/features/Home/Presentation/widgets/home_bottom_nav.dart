@@ -14,10 +14,11 @@ class HomeBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SafeArea(
+      top: false,
       child: Container(
         height: 68.h,
-        width: 428.w,
+        width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -28,17 +29,17 @@ class HomeBottomNav extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            Expanded(child: _buildNavItem(0, 'assets/images/nav_home.png', 'Home', top: 17.h, left: 24.w, isImage: true)),
-            Expanded(child: _buildNavItem(1, Icons.map_outlined, 'Map', top: 15.h, left: 25.w)),
-            Expanded(child: _buildNavItem(2, 'assets/images/nav_delivery.png', 'Delivery', top: 15.h, left: 25.w, isImage: true)),
-            Expanded(child: _buildNavItem(3, 'assets/images/nav_more.png', 'More', top: 15.5.h, left: 21.w, isImage: true)),
-          ],
-        ),
+      child: Row(
+        children: [
+          Expanded(child: _buildNavItem(0, 'assets/images/nav_home.png', 'Home', top: 17.h, left: 24.w, isImage: true)),
+          Expanded(child: _buildNavItem(1, Icons.map_outlined, 'Map', top: 15.h, left: 25.w)),
+          Expanded(child: _buildNavItem(2, 'assets/images/nav_delivery.png', 'Delivery', top: 15.h, left: 25.w, isImage: true)),
+          Expanded(child: _buildNavItem(3, 'assets/images/nav_more.png', 'More', top: 15.5.h, left: 21.w, isImage: true)),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildNavItem(
     int index,

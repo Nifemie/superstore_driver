@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../features/Auth/Logic/register_logic.dart';
+import 'package:superstore_driver/controllers/register_controller.dart';
 
 class LocalStorageService {
   static const String _registerKey = 'register_state';

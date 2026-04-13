@@ -4,20 +4,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
-import '../../Logic/register_logic.dart';
-import '../Register/widgets/registration_tabs.dart';
+import 'package:superstore_driver/controllers/register_controller.dart';
+import 'package:superstore_driver/core/widgets/registration_tabs.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
 
 class BusinessDocumentUploadScreen extends ConsumerWidget {
   const BusinessDocumentUploadScreen({super.key});
 
   void _simulateUpload(WidgetRef ref) {
-    ref.read(registerLogicProvider.notifier).updateBusinessDocument('Business document.PDF');
+    ref.read(registerControllerProvider.notifier).updateBusinessDocument('Business document.PDF');
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(registerLogicProvider);
+    final state = ref.watch(registerControllerProvider);
 
     return Scaffold(
       backgroundColor: AppColors.primary,

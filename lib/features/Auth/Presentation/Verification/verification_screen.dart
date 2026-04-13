@@ -5,15 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/app_circle_button.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
-import 'package:superstore_driver/features/Auth/Logic/verification_logic.dart';
+import 'package:superstore_driver/controllers/verification_controller.dart';
 
 class VerificationScreen extends ConsumerWidget {
   const VerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(verificationLogicProvider);
-    final logic = ref.read(verificationLogicProvider.notifier);
+    final state = ref.watch(verificationControllerProvider);
+    final logic = ref.read(verificationControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: AppColors.primary,
@@ -140,7 +140,7 @@ class _OtpInputRow extends StatelessWidget {
 
 class _ResendTimer extends StatelessWidget {
   final VerificationState state;
-  final VerificationLogic logic;
+  final VerificationController logic;
   const _ResendTimer({required this.state, required this.logic});
 
   @override
@@ -165,7 +165,7 @@ class _ResendTimer extends StatelessWidget {
 }
 
 class _CustomKeypad extends StatelessWidget {
-  final VerificationLogic logic;
+  final VerificationController logic;
   const _CustomKeypad({required this.logic});
 
   @override

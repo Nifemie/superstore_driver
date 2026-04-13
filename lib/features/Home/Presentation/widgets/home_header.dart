@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
-import 'package:superstore_driver/features/Auth/Logic/register_logic.dart';
+import 'package:superstore_driver/controllers/register_controller.dart';
 
 class HomeHeader extends ConsumerWidget {
   const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final registerState = ref.watch(registerLogicProvider);
+    final registerState = ref.watch(registerControllerProvider);
     final displayName = registerState.firstName.isNotEmpty ? registerState.firstName : 'Driver';
 
     return Row(

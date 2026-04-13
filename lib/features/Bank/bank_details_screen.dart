@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/app_text_field.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
-import '../../Logic/register_logic.dart';
-import '../Register/widgets/registration_tabs.dart';
+import 'package:superstore_driver/controllers/register_controller.dart';
+import 'package:superstore_driver/core/widgets/registration_tabs.dart';
 import 'bank_service.dart';
 
 class BankDetailsScreen extends ConsumerWidget {
@@ -14,8 +14,8 @@ class BankDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(registerLogicProvider);
-    final logic = ref.read(registerLogicProvider.notifier);
+    final state = ref.watch(registerControllerProvider);
+    final logic = ref.read(registerControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: AppColors.primary,
@@ -129,7 +129,7 @@ class BankDetailsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildBankDropdown(BuildContext context, RegisterState state, RegisterLogic logic) {
+  Widget _buildBankDropdown(BuildContext context, RegisterState state, RegisterController logic) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

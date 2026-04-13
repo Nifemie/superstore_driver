@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'models/transaction_model.dart';
+import '../models/transaction_model.dart';
 
 class TransactionState {
   final DateTime? selectedDate;
@@ -38,11 +38,14 @@ class TransactionState {
   }
 }
 
-class TransactionLogic extends StateNotifier<TransactionState> {
-  TransactionLogic() : super(TransactionState(
-    selectedDate: null, // Start with "All"
-    allTransactions: _mockData,
-  ));
+class TransactionController extends Notifier<TransactionState> {
+  @override
+  TransactionState build() {
+    return TransactionState(
+      selectedDate: null, 
+      allTransactions: _mockData,
+    );
+  }
 
   void updateDate(int month, int year) {
     state = state.copyWith(selectedDate: DateTime(year, month), clearDate: false);
@@ -71,6 +74,4 @@ class TransactionLogic extends StateNotifier<TransactionState> {
   ];
 }
 
-final transactionLogicProvider = StateNotifierProvider<TransactionLogic, TransactionState>((ref) {
-  return TransactionLogic();
-});
+final transactionControllerProvider = NotifierProvider<TransactionController, TransactionState>(TransactionController.new);

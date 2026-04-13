@@ -5,7 +5,7 @@ import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/app_text_field.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
 import 'package:superstore_driver/core/widgets/social_auth_button.dart';
-import 'package:superstore_driver/features/Auth/Logic/login_logic.dart';
+import 'package:superstore_driver/controllers/login_controller.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
@@ -75,8 +75,8 @@ class _LoginForm extends ConsumerWidget {
   const _LoginForm();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(loginLogicProvider);
-    final logic = ref.read(loginLogicProvider.notifier);
+    final state = ref.watch(loginControllerProvider);
+    final logic = ref.read(loginControllerProvider.notifier);
     return Column(
       children: [
         AppTextField(
@@ -110,13 +110,13 @@ class _SocialSection extends ConsumerWidget {
         SocialAuthButton(
           text: 'Continue with Google',
           iconPath: 'assets/icons/google_logo.png',
-          onPressed: () => ref.read(loginLogicProvider.notifier).onSocialLogin('google'),
+          onPressed: () => ref.read(loginControllerProvider.notifier).onSocialLogin('google'),
         ),
         SizedBox(height: 16.h),
         SocialAuthButton(
           text: 'Continue with Apple ID',
           iconPath: 'assets/icons/apple_logo.png',
-          onPressed: () => ref.read(loginLogicProvider.notifier).onSocialLogin('apple'),
+          onPressed: () => ref.read(loginControllerProvider.notifier).onSocialLogin('apple'),
         ),
       ],
     );

@@ -7,8 +7,8 @@ import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/app_text_field.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
-import '../../Logic/register_logic.dart';
-import 'package:superstore_driver/features/Auth/Presentation/Register/widgets/registration_tabs.dart';
+import 'package:superstore_driver/controllers/register_controller.dart';
+import 'package:superstore_driver/core/widgets/registration_tabs.dart';
 
 class BusinessVerificationScreen extends ConsumerStatefulWidget {
   const BusinessVerificationScreen({super.key});
@@ -22,8 +22,8 @@ class _BusinessVerificationScreenState extends ConsumerState<BusinessVerificatio
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(registerLogicProvider);
-    final logic = ref.read(registerLogicProvider.notifier);
+    final state = ref.watch(registerControllerProvider);
+    final logic = ref.read(registerControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: AppColors.primary,

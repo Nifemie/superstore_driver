@@ -1,8 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
-
-part 'login_logic.g.dart';
 
 class LoginState {
   final String email;
@@ -24,8 +23,7 @@ class LoginState {
   }
 }
 
-@riverpod
-class LoginLogic extends _$LoginLogic {
+class LoginController extends Notifier<LoginState> {
   @override
   LoginState build() {
     return const LoginState(email: '');
@@ -36,18 +34,11 @@ class LoginLogic extends _$LoginLogic {
   }
 
   void onNextPressed(BuildContext context) {
-    if (_isValidEmail(state.email)) {
-      context.push(AppRoutes.verification);
-    } else {
-      state = state.copyWith(errorMessage: 'Please enter a valid email address');
-    }
-  }
-
-  bool _isValidEmail(String email) {
-    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+    context.push(AppRoutes.verification);
   }
 
   void onSocialLogin(String provider) {
-    // Social login implementation
   }
 }
+
+final loginControllerProvider = NotifierProvider<LoginController, LoginState>(LoginController.new);

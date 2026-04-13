@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:superstore_driver/features/Home/Logic/home_logic.dart';
+import 'package:superstore_driver/controllers/home_controller.dart';
 import 'package:superstore_driver/features/Home/Presentation/widgets/home_header.dart';
 import 'package:superstore_driver/features/Home/Presentation/widgets/earnings_card.dart';
 import 'package:superstore_driver/features/Home/Presentation/widgets/status_toggle.dart';
@@ -15,7 +15,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final homeState = ref.watch(homeLogicProvider);
+    final homeState = ref.watch(homeControllerProvider);
     
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FB),

@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/utils/currency_formatter.dart';
-import 'package:superstore_driver/features/Home/Logic/home_logic.dart';
+import 'package:superstore_driver/controllers/home_controller.dart';
 
 class EarningsCard extends ConsumerWidget {
   const EarningsCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeLogicProvider);
+    final state = ref.watch(homeControllerProvider);
     
     return Container(
       width: double.infinity,
@@ -42,7 +42,7 @@ class EarningsCard extends ConsumerWidget {
                     ),
                     SizedBox(width: 8.w),
                     GestureDetector(
-                      onTap: () => ref.read(homeLogicProvider.notifier).toggleEarningsVisibility(),
+                      onTap: () => ref.read(homeControllerProvider.notifier).toggleEarningsVisibility(),
                       child: Icon(
                         state.showEarnings ? Icons.visibility_outlined : Icons.visibility_off_outlined,
                         color: Colors.white.withOpacity(0.9),
