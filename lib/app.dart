@@ -13,12 +13,11 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Superstore Driver',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
-          initialRoute: AppRoutes.splash,
-          routes: AppRoutes.routes,
+          routerConfig: AppRoutes.router,
         );
       },
     );

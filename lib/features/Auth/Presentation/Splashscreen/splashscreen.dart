@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/services/local_storage_service.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
@@ -22,9 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
       if (mounted) {
         final loggedIn = await LocalStorageService.isLoggedIn();
         if (loggedIn) {
-          Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+          context.go(AppRoutes.home);
         } else {
-          Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+          context.go(AppRoutes.login);
         }
       }
     });

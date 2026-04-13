@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
@@ -90,7 +91,7 @@ class UnderReviewScreen extends StatelessWidget {
               PrimaryButton(
                 text: 'Done',
                 onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.home, (route) => false);
+                  context.go(AppRoutes.home);
                 },
               ),
               SizedBox(height: 40.h),

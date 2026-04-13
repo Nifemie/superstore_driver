@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class BankDetailsScreen extends ConsumerWidget {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.arrow_back, color: Colors.black, size: 28),
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () => context.pop(),
                           ),
                           Center(
                             child: Text(

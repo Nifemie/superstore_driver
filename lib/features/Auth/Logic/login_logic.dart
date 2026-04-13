@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
 
@@ -37,7 +37,7 @@ class LoginLogic extends _$LoginLogic {
 
   void onNextPressed(BuildContext context) {
     if (_isValidEmail(state.email)) {
-      Navigator.pushNamed(context, AppRoutes.verification);
+      context.push(AppRoutes.verification);
     } else {
       state = state.copyWith(errorMessage: 'Please enter a valid email address');
     }

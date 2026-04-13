@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 
@@ -124,7 +125,7 @@ class _MonthYearPickerDialogState extends State<MonthYearPickerDialog> {
                   child: GestureDetector(
                     onTap: () {
                       widget.onDone(selectedMonth, selectedYear);
-                      Navigator.pop(context);
+                      context.pop();
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 12.h),

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class _BusinessVerificationScreenState extends ConsumerState<BusinessVerificatio
                         children: [
                           IconButton(
                             icon: const Icon(Icons.arrow_back, color: Colors.black, size: 28),
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () => context.pop(),
                           ),
                           Center(
                             child: Text(
@@ -121,7 +122,7 @@ class _BusinessVerificationScreenState extends ConsumerState<BusinessVerificatio
                               isLoading: state.isLoading,
                               onPressed: _isFormValid(state)
                                   ? () {
-                                      Navigator.pushNamed(context, AppRoutes.businessUpload);
+                                      context.push(AppRoutes.businessUpload);
                                     }
                                   : null,
                             ),

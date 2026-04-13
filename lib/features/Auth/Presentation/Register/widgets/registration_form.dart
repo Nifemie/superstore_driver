@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -119,7 +120,7 @@ class _RegistrationFormState extends ConsumerState<RegistrationForm> {
         PrimaryButton(
           text: 'Next',
           isLoading: state.isLoading,
-          onPressed: _isFormValid(state) ? () => Navigator.pushNamed(context, AppRoutes.identityVerification) : null,
+          onPressed: _isFormValid(state) ? () => context.push(AppRoutes.identityVerification) : null,
         ),
         SizedBox(height: 24.h),
         const FooterText(),

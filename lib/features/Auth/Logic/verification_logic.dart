@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/services/local_storage_service.dart';
 import '../../../routes/app_routes.dart';
@@ -87,7 +87,7 @@ class VerificationLogic extends _$VerificationLogic {
     if (state.otp == '12345') {
       state = state.copyWith(clearError: true);
       LocalStorageService.setLoggedIn(true);
-      Navigator.pushNamed(context, AppRoutes.register);
+      context.push(AppRoutes.register);
     } else if (state.otp.length == 5) {
       state = state.copyWith(errorMessage: 'Incorrect OTP: Check the code and try again');
     }

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -34,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.zero,
                         icon: const Icon(Icons.arrow_back, color: Colors.black, size: 28),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => context.pop(),
                       ),
                     ),
                     Expanded(

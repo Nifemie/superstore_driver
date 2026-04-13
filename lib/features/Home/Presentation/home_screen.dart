@@ -45,7 +45,6 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            const HomeBottomNav(),
           ],
         ),
       ),

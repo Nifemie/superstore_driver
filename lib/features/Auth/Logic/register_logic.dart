@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
 import '../../../core/services/local_storage_service.dart';
@@ -172,7 +172,7 @@ class RegisterLogic extends _$RegisterLogic {
     state = state.copyWith(isLoading: true);
     Future.delayed(const Duration(seconds: 2), () {
       state = state.copyWith(isLoading: false);
-      Navigator.pushNamed(context, AppRoutes.underReview);
+      context.push(AppRoutes.underReview);
     });
   }
 }
