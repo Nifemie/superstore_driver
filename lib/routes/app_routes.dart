@@ -12,6 +12,9 @@ import '../features/Auth/Presentation/Register/under_review_screen.dart';
 import '../features/Home/Presentation/home_screen.dart';
 import '../features/Transactions/Presentation/transactions_screen.dart';
 import '../features/Withdrawal/Presentation/withdrawal_screen.dart';
+import '../features/Withdrawal/Presentation/withdrawal_verification_screen.dart';
+import '../features/Withdrawal/Presentation/withdrawal_success_screen.dart';
+import '../features/More/Presentation/more_screen.dart';
 import '../features/Home/Presentation/placeholder_screens.dart';
 import '../core/widgets/scaffold_with_navbar.dart';
 
@@ -28,6 +31,8 @@ class AppRoutes {
   static const String home = '/home';
   static const String transactions = 'transactions'; 
   static const String withdrawal = '/withdrawal'; 
+  static const String withdrawalVerification = '/withdrawal_verification'; 
+  static const String withdrawalSuccess = '/withdrawal_success'; 
   static const String map = '/map';
   static const String delivery = '/delivery';
   static const String more = '/more';
@@ -83,6 +88,14 @@ class AppRoutes {
         path: withdrawal,
         builder: (context, state) => const WithdrawalScreen(),
       ),
+      GoRoute(
+        path: withdrawalVerification,
+        builder: (context, state) => const WithdrawalVerificationScreen(),
+      ),
+      GoRoute(
+        path: withdrawalSuccess,
+        builder: (context, state) => const WithdrawalSuccessScreen(),
+      ),
 
 
       StatefulShellRoute.indexedStack(
@@ -132,7 +145,7 @@ class AppRoutes {
             routes: [
               GoRoute(
                 path: more,
-                builder: (context, state) => const MorePlaceholderScreen(),
+                builder: (context, state) => const MoreScreen(),
               ),
             ],
           ),

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
-import 'package:superstore_driver/core/widgets/app_circle_button.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
 import 'package:superstore_driver/controllers/verification_controller.dart';
+import 'package:superstore_driver/core/widgets/otp_input_row.dart';
+import 'package:superstore_driver/features/Auth/Presentation/Verification/widgets/verification_keypad.dart';
 
 class VerificationScreen extends ConsumerWidget {
   const VerificationScreen({super.key});
@@ -51,19 +52,27 @@ class VerificationScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Enter the verification code\nsent to you',
-                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                      fontWeight: FontWeight.w900,
-                                      height: 1.1,
-                                    ),
+                                'Enter the verification code sent to you',
+                                style: TextStyle(
+                                  fontSize: 26.sp,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Inter',
+                                  height: 1.1,
+                                  color: const Color(0xFF1E1E1E),
+                                ),
                               ),
-                              SizedBox(height: 4.h),
+                              SizedBox(height: 8.h),
                               Text(
                                 'We have sent an OTP to \u201cJohndoe@gmail.com\u201d',
-                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
+                                style: TextStyle(
+                                  color: const Color(0xFF666666),
+                                  fontSize: 14.sp,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                               SizedBox(height: 20.h),
-                              _OtpInputRow(otp: state.otp),
+                              OtpInputRow(otp: state.otp),
                               if (state.errorMessage != null) ...[
                                 SizedBox(height: 12.h),
                                 Row(
@@ -91,7 +100,7 @@ class VerificationScreen extends ConsumerWidget {
                                     : null,
                               ),
                               SizedBox(height: 24.h),
-                              _CustomKeypad(logic: logic),
+                              const VerificationKeypad(),
                             ],
                           ),
                         ),
@@ -108,36 +117,6 @@ class VerificationScreen extends ConsumerWidget {
   }
 }
 
-class _OtpInputRow extends StatelessWidget {
-  final String otp;
-  const _OtpInputRow({required this.otp});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(5, (index) {
-        final isFilled = index < otp.length;
-        final isActive = index == otp.length;
-        return Container(
-          height: 52.r,
-          width: 52.r,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(
-              color: isActive ? AppColors.primary : AppColors.divider.withOpacity(0.5),
-              width: isActive ? 2 : 1,
-            ),
-          ),
-          alignment: Alignment.center,
-          child: Text(isFilled ? otp[index] : '', style: Theme.of(context).textTheme.headlineSmall),
-        );
-      }),
-    );
-  }
-}
-
 class _ResendTimer extends StatelessWidget {
   final VerificationState state;
   final VerificationController logic;
@@ -147,57 +126,25 @@ class _ResendTimer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.refresh_rounded, size: 20.r, color: AppColors.textSecondary),
+        Icon(
+          Icons.refresh_rounded,
+          size: 20.sp,
+          color: const Color(0xFF666666),
+        ),
         SizedBox(width: 8.w),
         GestureDetector(
           onTap: state.canResend ? () => logic.resendCode() : null,
           child: Text(
             state.canResend ? 'Resend code' : 'Resend code in ${state.timerSeconds}s',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: state.canResend ? AppColors.primary : AppColors.textSecondary,
-              fontWeight: FontWeight.w600,
+            style: TextStyle(
+              color: const Color(0xFF666666),
+              fontSize: 14.sp,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class _CustomKeypad extends StatelessWidget {
-  final VerificationController logic;
-  const _CustomKeypad({required this.logic});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildRow(['1', '2', '3']),
-        SizedBox(height: 12.h),
-        _buildRow(['4', '5', '6']),
-        SizedBox(height: 12.h),
-        _buildRow(['7', '8', '9']),
-        SizedBox(height: 12.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(width: 64.r, height: 64.r),
-            AppCircleButton(text: '0', onTap: () => logic.addDigit('0')),
-            AppCircleButton(
-              icon: Icons.backspace_outlined,
-              iconColor: Colors.redAccent,
-              onTap: () => logic.removeDigit(),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRow(List<String> keys) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: keys.map((key) => AppCircleButton(text: key, onTap: () => logic.addDigit(key))).toList(),
     );
   }
 }
