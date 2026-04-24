@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/utils/currency_formatter.dart';
 import 'package:superstore_driver/controllers/home_controller.dart';
+import 'package:superstore_driver/routes/app_routes.dart';
 
 class EarningsCard extends ConsumerWidget {
   const EarningsCard({super.key});
@@ -65,22 +67,25 @@ class EarningsCard extends ConsumerWidget {
               ],
             ),
           ),
-          Container(
-            width: 134.w,
-            height: 40.h,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30.r),
-            ),
-            child: Text(
-              'Withdraw earnings',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.primary,
-                fontSize: 11.sp,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Inter',
+          GestureDetector(
+            onTap: () => context.push(AppRoutes.withdrawal),
+            child: Container(
+              width: 134.w,
+              height: 40.h,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30.r),
+              ),
+              child: Text(
+                'Withdraw earnings',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 11.sp,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Inter',
+                ),
               ),
             ),
           ),

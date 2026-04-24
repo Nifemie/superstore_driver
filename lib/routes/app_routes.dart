@@ -7,10 +7,11 @@ import '../features/Auth/Presentation/Register/register_screen.dart';
 import '../features/Auth/Presentation/Identity/identity_verification_screen.dart';
 import '../features/Auth/Presentation/Business/business_verification_screen.dart';
 import '../features/Auth/Presentation/Business/business_document_upload_screen.dart';
-import '../features/Bank/bank_details_screen.dart';
+import '../features/Auth/Presentation/Bank/bank_details_screen.dart';
 import '../features/Auth/Presentation/Register/under_review_screen.dart';
 import '../features/Home/Presentation/home_screen.dart';
 import '../features/Transactions/Presentation/transactions_screen.dart';
+import '../features/Withdrawal/Presentation/withdrawal_screen.dart';
 import '../features/Home/Presentation/placeholder_screens.dart';
 import '../core/widgets/scaffold_with_navbar.dart';
 
@@ -26,6 +27,7 @@ class AppRoutes {
   static const String underReview = '/under_review';
   static const String home = '/home';
   static const String transactions = 'transactions'; 
+  static const String withdrawal = '/withdrawal'; 
   static const String map = '/map';
   static const String delivery = '/delivery';
   static const String more = '/more';
@@ -76,6 +78,10 @@ class AppRoutes {
       GoRoute(
         path: underReview,
         builder: (context, state) => const UnderReviewScreen(),
+      ),
+      GoRoute(
+        path: withdrawal,
+        builder: (context, state) => const WithdrawalScreen(),
       ),
 
 

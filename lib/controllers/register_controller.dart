@@ -168,6 +168,7 @@ class RegisterController extends Notifier<RegisterState> {
   }
 
   void submit(BuildContext context) {
+    // Dummy submission logic
     state = state.copyWith(isLoading: true);
     Future.delayed(const Duration(seconds: 1), () {
       state = state.copyWith(isLoading: false);

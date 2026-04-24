@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:superstore_driver/core/services/local_storage_service.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
 
+// verification state
 class VerificationState {
   final String otp;
   final int timerSeconds;
