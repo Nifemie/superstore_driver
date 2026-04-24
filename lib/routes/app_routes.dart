@@ -15,6 +15,7 @@ import '../features/Withdrawal/Presentation/withdrawal_screen.dart';
 import '../features/Withdrawal/Presentation/withdrawal_verification_screen.dart';
 import '../features/Withdrawal/Presentation/withdrawal_success_screen.dart';
 import '../features/More/Presentation/more_screen.dart';
+import '../features/More/Presentation/Account/account_details_screen.dart';
 import '../features/Home/Presentation/placeholder_screens.dart';
 import '../core/widgets/scaffold_with_navbar.dart';
 
@@ -36,6 +37,7 @@ class AppRoutes {
   static const String map = '/map';
   static const String delivery = '/delivery';
   static const String more = '/more';
+  static const String accountDetails = '/account_details';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorHomeKey = GlobalKey<NavigatorState>(debugLabel: 'shellHome');
@@ -96,7 +98,10 @@ class AppRoutes {
         path: withdrawalSuccess,
         builder: (context, state) => const WithdrawalSuccessScreen(),
       ),
-
+      GoRoute(
+        path: accountDetails,
+        builder: (context, state) => const AccountDetailsScreen(),
+      ),
 
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

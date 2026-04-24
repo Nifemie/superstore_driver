@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:superstore_driver/core/theme/app_colors.dart';
+import 'package:superstore_driver/routes/app_routes.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -26,37 +28,43 @@ class MoreScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 32.h),
-              // Profile Section
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30.r,
-                    backgroundImage: const AssetImage('assets/images/driver_profile.png'),
-                  ),
-                  SizedBox(width: 16.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              GestureDetector(
+                onTap: () => context.push(AppRoutes.accountDetails),
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.h),
+                  child: Row(
                     children: [
-                      Text(
-                        'My account',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: const Color(0xFF666666),
-                          fontFamily: 'Inter',
-                        ),
+                      CircleAvatar(
+                        radius: 30.r,
+                        backgroundImage: const AssetImage('assets/images/driver_profile.png'),
                       ),
-                      Text(
-                        'Edward Makarov',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xFF1E1E1E),
-                          fontFamily: 'Inter',
-                        ),
+                      SizedBox(width: 16.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'My account',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: const Color(0xFF666666),
+                              fontFamily: 'Inter',
+                            ),
+                          ),
+                          Text(
+                            'Edward Makarov',
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF1E1E1E),
+                              fontFamily: 'Inter',
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
               SizedBox(height: 40.h),
               // Menu Items
