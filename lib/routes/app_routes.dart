@@ -16,6 +16,9 @@ import '../features/Withdrawal/Presentation/withdrawal_verification_screen.dart'
 import '../features/Withdrawal/Presentation/withdrawal_success_screen.dart';
 import '../features/More/Presentation/more_screen.dart';
 import '../features/More/Presentation/Account/account_details_screen.dart';
+import '../features/More/Presentation/EditProfile/edit_profile_screen.dart';
+import '../features/More/Presentation/PaymentMethod/payment_method_screen.dart';
+import '../features/More/Presentation/PaymentMethod/bank_detail_screen.dart';
 import '../features/Home/Presentation/placeholder_screens.dart';
 import '../core/widgets/scaffold_with_navbar.dart';
 
@@ -38,6 +41,9 @@ class AppRoutes {
   static const String delivery = '/delivery';
   static const String more = '/more';
   static const String accountDetails = '/account_details';
+  static const String editProfile = '/edit_profile';
+  static const String paymentMethod = '/payment_method';
+  static const String bankDetail = '/bank_detail';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorHomeKey = GlobalKey<NavigatorState>(debugLabel: 'shellHome');
@@ -101,6 +107,18 @@ class AppRoutes {
       GoRoute(
         path: accountDetails,
         builder: (context, state) => const AccountDetailsScreen(),
+      ),
+      GoRoute(
+        path: editProfile,
+        builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: paymentMethod,
+        builder: (context, state) => const PaymentMethodScreen(),
+      ),
+      GoRoute(
+        path: bankDetail,
+        builder: (context, state) => const BankDetailScreen(),
       ),
 
       StatefulShellRoute.indexedStack(

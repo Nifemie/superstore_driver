@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:superstore_driver/controllers/withdrawal_verification_controller.dart';
-import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/core/widgets/otp_input_row.dart';
 import 'package:superstore_driver/core/widgets/primary_button.dart';
 import 'package:superstore_driver/core/widgets/custom_numeric_keypad.dart';

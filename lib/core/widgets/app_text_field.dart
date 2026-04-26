@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../theme/app_colors.dart';
 
@@ -15,6 +16,10 @@ class AppTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final String? errorText;
   final bool showCheckMark;
+  final TextEditingController? controller;
+  final bool readOnly;
+  final VoidCallback? onTap;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
     super.key,
@@ -30,6 +35,10 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.errorText,
     this.showCheckMark = false,
+    this.controller,
+    this.readOnly = false,
+    this.onTap,
+    this.inputFormatters,
   });
 
   @override
@@ -48,10 +57,14 @@ class AppTextField extends StatelessWidget {
           SizedBox(height: 8.h),
         ],
         TextFormField(
-          initialValue: initialValue,
+          controller: controller,
+          initialValue: controller == null ? initialValue : null,
           maxLines: maxLines,
           keyboardType: keyboardType,
           obscureText: isPassword,
+          readOnly: readOnly,
+          onTap: onTap,
+          inputFormatters: inputFormatters,
           onChanged: onChanged,
           style: Theme.of(context).textTheme.bodyLarge,
           decoration: InputDecoration(
@@ -62,10 +75,7 @@ class AppTextField extends StatelessWidget {
                 ),
             prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: AppColors.textSecondary) : null,
             suffixIcon: showCheckMark
-                ? Container(
-                    padding: EdgeInsets.all(12.r),
-                    child: Text('✅', style: TextStyle(fontSize: 16.sp)),
-                  )
+                ? Icon(Icons.check_circle, color: const Color(0xFF4CAF50), size: 24.r)
                 : (suffixIcon != null ? Icon(suffixIcon, color: suffixIconColor ?? AppColors.textSecondary) : null),
             filled: true,
             fillColor: Colors.white,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:superstore_driver/core/theme/app_colors.dart';
 import 'package:superstore_driver/routes/app_routes.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -71,7 +70,7 @@ class MoreScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.credit_card_outlined,
                 title: 'Bank account',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.paymentMethod),
               ),
               _buildMenuItem(
                 icon: Icons.vpn_key_outlined,
