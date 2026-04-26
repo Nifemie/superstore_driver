@@ -5,17 +5,22 @@ class BankItem extends StatelessWidget {
   final String name;
   final String accountNumber;
   final String bankName;
+  final VoidCallback? onTap;
 
   const BankItem({
     super.key,
     required this.name,
     required this.accountNumber,
     required this.bankName,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
       padding: EdgeInsets.symmetric(vertical: 12.h),
       child: Row(
         children: [
@@ -61,6 +66,7 @@ class BankItem extends StatelessWidget {
             size: 16.sp,
           ),
         ],
+      ),
       ),
     );
   }

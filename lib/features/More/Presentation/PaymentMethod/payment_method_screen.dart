@@ -58,10 +58,11 @@ class PaymentMethodScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16.h),
-                    const BankItem(
+                    BankItem(
                       name: 'John Doe',
                       accountNumber: '123910138389',
                       bankName: 'United bank of Africa',
+                      onTap: () => context.push(AppRoutes.bankDetail),
                     ),
                     SizedBox(height: 24.h),
                     // Other Payment Method
@@ -75,16 +76,18 @@ class PaymentMethodScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16.h),
-                    const BankItem(
+                    BankItem(
                       name: 'John Doe',
                       accountNumber: '123910138389',
                       bankName: 'United bank of Africa',
+                      onTap: () => context.push(AppRoutes.bankDetail),
                     ),
                     Divider(color: const Color(0xFFEEEEEE), height: 1.h),
-                    const BankItem(
+                    BankItem(
                       name: 'John Doe',
                       accountNumber: '123910138389',
                       bankName: 'United bank of Africa',
+                      onTap: () => context.push(AppRoutes.bankDetail),
                     ),
                     const Spacer(),
                     // Add New Bank Button
@@ -97,7 +100,7 @@ class PaymentMethodScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: TextButton(
-                        onPressed: () => context.push(AppRoutes.bankDetail),
+                        onPressed: () => context.push(AppRoutes.addBank),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

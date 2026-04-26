@@ -80,7 +80,7 @@ class MoreScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.description_outlined,
                 title: 'Documents',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.verificationDocuments),
               ),
               _buildMenuItem(
                 icon: Icons.headset_mic_outlined,
