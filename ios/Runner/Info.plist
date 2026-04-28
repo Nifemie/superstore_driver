@@ -49,5 +49,9 @@
 	<string>We need camera access to snap your identity document for verification.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need gallery access to upload your identity document for verification.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show you on the map and find nearby delivery orders.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to track deliveries and show your position on the map.</string>
 </dict>
 </plist>

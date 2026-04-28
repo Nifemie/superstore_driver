@@ -8,7 +8,6 @@ import 'package:superstore_driver/features/Home/Presentation/widgets/status_togg
 import 'package:superstore_driver/features/Home/Presentation/widgets/order_alert.dart';
 import 'package:superstore_driver/features/Home/Presentation/widgets/activities_section.dart';
 import 'package:superstore_driver/features/Home/Presentation/widgets/transactions_section.dart';
-import 'package:superstore_driver/features/Home/Presentation/widgets/home_bottom_nav.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

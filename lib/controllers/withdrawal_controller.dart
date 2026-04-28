@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:superstore_driver/core/utils/currency_formatter.dart';
 
 class WithdrawalState {
   final String amount; // The raw digits entered

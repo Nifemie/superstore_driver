@@ -16,8 +16,9 @@ import '../features/Withdrawal/Presentation/withdrawal_verification_screen.dart'
 import '../features/Withdrawal/Presentation/withdrawal_success_screen.dart';
 import '../features/More/Presentation/more_screen.dart';
 import '../features/More/Presentation/Account/account_details_screen.dart';
-import '../features/Home/Presentation/placeholder_screens.dart';
-import '../core/widgets/scaffold_with_navbar.dart';
+import '../features/Delivery/Presentation/screens/delivery_screen.dart';
+import '../features/Map/Presentation/screens/map_screen.dart';
+import '../dashboard_shell.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -30,13 +31,13 @@ class AppRoutes {
   static const String bankDetails = '/bank_details';
   static const String underReview = '/under_review';
   static const String home = '/home';
+  static const String map = '/map';
+  static const String delivery = '/delivery';
+  static const String more = '/more';
   static const String transactions = 'transactions'; 
   static const String withdrawal = '/withdrawal'; 
   static const String withdrawalVerification = '/withdrawal_verification'; 
   static const String withdrawalSuccess = '/withdrawal_success'; 
-  static const String map = '/map';
-  static const String delivery = '/delivery';
-  static const String more = '/more';
   static const String accountDetails = '/account_details';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -103,12 +104,13 @@ class AppRoutes {
         builder: (context, state) => const AccountDetailsScreen(),
       ),
 
+      // Dashboard Shell with Provider-based bottom nav
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
-          return ScaffoldWithNavBar(navigationShell: navigationShell);
+          return DashboardShellWrapper(navigationShell: navigationShell);
         },
         branches: [
-
+          // Home Branch
           StatefulShellBranch(
             navigatorKey: _shellNavigatorHomeKey,
             routes: [
@@ -125,26 +127,29 @@ class AppRoutes {
             ],
           ),
 
+          // Map Branch
           StatefulShellBranch(
             navigatorKey: _shellNavigatorMapKey,
             routes: [
               GoRoute(
                 path: map,
-                builder: (context, state) => const MapPlaceholderScreen(),
+                builder: (context, state) => const MapScreen(),
               ),
             ],
           ),
 
+          // Delivery Branch
           StatefulShellBranch(
             navigatorKey: _shellNavigatorDeliveryKey,
             routes: [
               GoRoute(
                 path: delivery,
-                builder: (context, state) => const DeliveryPlaceholderScreen(),
+                builder: (context, state) => const DeliveryScreen(),
               ),
             ],
           ),
 
+          // More Branch
           StatefulShellBranch(
             navigatorKey: _shellNavigatorMoreKey,
             routes: [
