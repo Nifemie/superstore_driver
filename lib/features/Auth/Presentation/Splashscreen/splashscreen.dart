@@ -22,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () async {
       if (mounted) {
         final loggedIn = await LocalStorageService.isLoggedIn();
+        if (!mounted) return;
         if (loggedIn) {
           context.go(AppRoutes.home);
         } else {

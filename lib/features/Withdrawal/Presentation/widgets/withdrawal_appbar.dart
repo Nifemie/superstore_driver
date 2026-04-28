@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:superstore_driver/core/theme/app_colors.dart';
 
 class WithdrawalAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WithdrawalAppBar({super.key});
@@ -9,6 +8,7 @@ class WithdrawalAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      toolbarHeight: 64.h,
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
@@ -29,5 +29,5 @@ class WithdrawalAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(56.h);
+  Size get preferredSize => Size.fromHeight(64.h);
 }

@@ -20,9 +20,9 @@ class AccountDetailsScreen extends StatelessWidget {
             children: [
               SizedBox(height: 8.h),
               const TripsStatsCard(),
-              SizedBox(height: 48.h),
+              SizedBox(height: 20.h),
               const PersonalDetailsSection(),
-              SizedBox(height: 32.h),
+              SizedBox(height: 20.h),
               const BusinessDetailsSection(),
               SizedBox(height: 48.h),
             ],

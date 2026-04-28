@@ -70,7 +70,7 @@ class MoreScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.credit_card_outlined,
                 title: 'Bank account',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.paymentMethod),
               ),
               _buildMenuItem(
                 icon: Icons.vpn_key_outlined,
@@ -80,7 +80,7 @@ class MoreScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.description_outlined,
                 title: 'Documents',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.verificationDocuments),
               ),
               _buildMenuItem(
                 icon: Icons.headset_mic_outlined,

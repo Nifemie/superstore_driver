@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:superstore_driver/routes/app_routes.dart';
 
 class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AccountAppBar({super.key});
@@ -9,13 +10,14 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return PreferredSize(
       preferredSize: Size.fromHeight(130.h),
-      child: SafeArea(
-        child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
+      child: Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.w),
+            child: Stack(
+              alignment: Alignment.center,
+          children: [
               // Centered Profile Picture (Positioned lower)
               Positioned(
                 top: 20.h,
@@ -26,7 +28,7 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               // Navigation Row (Back and Edit) - Placed last to be on top for clicks
               Positioned(
-                top: 0,
+                top: 12.h,
                 left: 0,
                 right: 0,
                 child: Row(
@@ -37,7 +39,7 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
                       onPressed: () => context.pop(),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => context.push(AppRoutes.editProfile),
                       child: Row(
                         children: [
                           Text(
@@ -64,8 +66,9 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   @override
   Size get preferredSize => Size.fromHeight(130.h);
