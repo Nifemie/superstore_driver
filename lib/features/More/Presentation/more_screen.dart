@@ -75,7 +75,7 @@ class MoreScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.vpn_key_outlined,
                 title: 'Login & Security',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.security),
               ),
               _buildMenuItem(
                 icon: Icons.description_outlined,
@@ -85,12 +85,12 @@ class MoreScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.headset_mic_outlined,
                 title: 'Support',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.support),
               ),
               _buildMenuItem(
                 icon: Icons.policy_outlined,
                 title: 'Privacy policy',
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.privacyPolicy),
               ),
               const Spacer(),
               // Log Out Button

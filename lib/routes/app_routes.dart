@@ -21,6 +21,10 @@ import '../features/More/Presentation/PaymentMethod/payment_method_screen.dart';
 import '../features/More/Presentation/PaymentMethod/bank_detail_screen.dart';
 import '../features/More/Presentation/PaymentMethod/add_bank_screen.dart';
 import '../features/More/Presentation/Documents/verification_documents_screen.dart';
+import '../features/More/Presentation/Security/security_screen.dart';
+import '../features/More/Presentation/Security/set_passkey_screen.dart';
+import '../features/More/Presentation/PrivacyPolicy/privacy_policy_screen.dart';
+import '../features/Support/Presentation/screens/support_screen.dart';
 import '../features/Home/Presentation/placeholder_screens.dart';
 import '../core/widgets/scaffold_with_navbar.dart';
 import '../features/Delivery/Presentation/screens/delivery_screen.dart';
@@ -51,6 +55,10 @@ class AppRoutes {
   static const String bankDetail = '/bank_detail';
   static const String addBank = '/add_bank';
   static const String verificationDocuments = '/verification_documents';
+  static const String security = '/security';
+  static const String setPasskey = '/set_passkey';
+  static const String support = '/support';
+  static const String privacyPolicy = '/privacy_policy';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorHomeKey = GlobalKey<NavigatorState>(debugLabel: 'shellHome');
@@ -134,6 +142,22 @@ class AppRoutes {
       GoRoute(
         path: verificationDocuments,
         builder: (context, state) => const VerificationDocumentsScreen(),
+      ),
+      GoRoute(
+        path: security,
+        builder: (context, state) => const SecurityScreen(),
+      ),
+      GoRoute(
+        path: setPasskey,
+        builder: (context, state) => const SetPasskeyScreen(),
+      ),
+      GoRoute(
+        path: support,
+        builder: (context, state) => const SupportScreen(),
+      ),
+      GoRoute(
+        path: privacyPolicy,
+        builder: (context, state) => const PrivacyPolicyScreen(),
       ),
 
       // Dashboard Shell with Provider-based bottom nav
